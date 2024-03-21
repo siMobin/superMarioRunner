@@ -2,6 +2,7 @@ package components.mario;
 
 import components.utility.*;
 import interfaces.Drawable;
+// import interfaces.GameSettings;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -17,6 +18,7 @@ public class Mario implements Drawable {
     private static final float MARIO_START_X = 50;
     private static int MARIO_RUNNING_ANIMATION_DELTA_TIME = 60;
     private static final int MARIO_BORDER_SIZE = 1;
+    static final float MARIO_FRAME = 11;
 
     private static final float X = MARIO_START_X;
 
@@ -66,16 +68,31 @@ public class Mario implements Drawable {
     private static Sound jumpSound = new Sound("/assets/sounds/mario/jump.wav");
     public Sound gameOverSound = new Sound("/assets/sounds/mario/dead.wav");
 
+    /**
+     * Constructor for the Mario class.
+     * 
+     * Initializes the Mario object with default animations
+     * and collision coordinates.
+     * 
+     * @see MarioStates // @RUNNING Animation objects...
+     */
+    // ResizeImage
     public Mario() {
-        runAnimation.addFrame(new Resource().getResourceImage("/assets/mario/Mario-left-up.png"));
-        runAnimation.addFrame(new Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
+        for (int i = 0; i <= MARIO_FRAME; i++) {
+            runAnimation
+                    .addFrame(ResizeImage.getResizedImage("/assets/marioFrame/frame_" + i + "_delay-0.04s.png", 50));
+            // runAnimation.addFrame(ResizeImage.getResizedImage("/assets/marioFrame/f1
+            // (2).png", 50));
+        }
+        // Add more @Animation addFrame
 
-        constructedCoordinates
-                .add(new Coordinates((int) X, (int) y + collisionLeft.y, collisionLeft.width, collisionLeft.height));
+        // Initialize collision coordinates
+        constructedCoordinates.add(
+                new Coordinates((int) X, (int) y + collisionLeft.y, collisionLeft.width, collisionLeft.height));
         constructedCoordinates.add(
                 new Coordinates((int) X + collisionMiddle.x, (int) y, collisionMiddle.width, collisionMiddle.height));
-        constructedCoordinates
-                .add(new Coordinates((int) X + collisionRight.x, (int) y, collisionRight.width, collisionRight.height));
+        constructedCoordinates.add(
+                new Coordinates((int) X + collisionRight.x, (int) y, collisionRight.width, collisionRight.height));
     }
 
     /**
@@ -138,14 +155,24 @@ public class Mario implements Drawable {
      */
     public void setMario() {
         System.out.println("\nSetting up mario...\n\n");
-        MARIO_RUNNING_ANIMATION_DELTA_TIME = 100;
+        // MARIO_RUNNING_ANIMATION_DELTA_TIME = 100;
 
         idleImage = new Resource().getResourceImage("/assets/mario/Mario-welcome.png");
         jumpImage = new Resource().getResourceImage("/assets/mario/Mario-jump.png");
         fallImage = new Resource().getResourceImage("/assets/mario/Mario-fall.png");
         runAnimation = new Animation(MARIO_RUNNING_ANIMATION_DELTA_TIME);
-        runAnimation.addFrame(new Resource().getResourceImage("/assets/mario/Mario-left-up.png"));
-        runAnimation.addFrame(new Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
+        // runAnimation.addFrame(new
+        // Resource().getResourceImage("/assets/mario/Mario-left-up.png"));
+        // runAnimation.addFrame(new
+        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
+        // runAnimation.addFrame(new
+        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
+        // runAnimation.addFrame(new
+        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
+        // runAnimation.addFrame(new
+        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
+        // runAnimation.addFrame(new
+        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
         dieImage = new Resource().getResourceImage("/assets/mario/Mario-dead.png");
 
         jumpSound = new Sound("/assets/sounds/mario/jump.wav");
