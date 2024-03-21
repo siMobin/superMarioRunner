@@ -12,7 +12,7 @@ import static main.GamePanel.debugMode;
 import static main.GamePanel.GAME_GRAVITY;
 
 public class Mario implements Drawable {
-    private static final int MARIO_JUMP_STRENGTH = 12;
+    private static final int MARIO_JUMP_STRENGTH = 13;
     private static final int MARIO_FALL_STRENGTH = 8;
     private static final float MARIO_START_X = 50;
     private static int MARIO_RUNNING_ANIMATION_DELTA_TIME = 60;
@@ -63,8 +63,8 @@ public class Mario implements Drawable {
      */
     public boolean jumpRequested;
 
-    private static Sound jumpSound = new Sound("/assets/sounds/button-press.wav");
-    public Sound gameOverSound = new Sound("/assets/sounds/hit.wav");
+    private static Sound jumpSound = new Sound("/assets/sounds/mario/jump.wav");
+    public Sound gameOverSound = new Sound("/assets/sounds/mario/dead.wav");
 
     public Mario() {
         runAnimation.addFrame(new Resource().getResourceImage("/assets/mario/Mario-left-up.png"));
@@ -78,10 +78,16 @@ public class Mario implements Drawable {
                 .add(new Coordinates((int) X + collisionRight.x, (int) y, collisionRight.width, collisionRight.height));
     }
 
+    /**
+     * Run method to set Mario's state to RUNNING.
+     */
     public void run() {
         marioState = MarioStates.RUNNING;
     }
 
+    /**
+     * Method to make the character jump in the game.
+     */
     public void jump() {
         if (marioState == MarioStates.RUNNING) {
             marioState = MarioStates.JUMPING;
@@ -100,6 +106,9 @@ public class Mario implements Drawable {
         }
     }
 
+    /**
+     * A method that simulates the fall of an object if it is in the air.
+     */
     public void fall() {
         if (isInAir()) {
             speedY = MARIO_FALL_STRENGTH;
@@ -107,15 +116,26 @@ public class Mario implements Drawable {
         }
     }
 
+    /**
+     * A method to set Mario's state to DIE and play the game over sound.
+     */
     public void die() {
         marioState = MarioStates.DIE;
         gameOverSound.play();
     }
 
+    /**
+     * Check if the Mario character is in the air.
+     *
+     * @return true if Mario is jumping or falling, false otherwise
+     */
     public boolean isInAir() {
         return marioState == MarioStates.JUMPING || marioState == MarioStates.FALL;
     }
 
+    /**
+     * Set up the Mario character with all required resources and sounds.
+     */
     public void setMario() {
         System.out.println("\nSetting up mario...\n\n");
         MARIO_RUNNING_ANIMATION_DELTA_TIME = 100;
@@ -139,6 +159,11 @@ public class Mario implements Drawable {
         System.out.println("Mario has been set up\n\n");
     }
 
+    /**
+     * Draw state into Graphics object
+     *
+     * @param g Graphics object used for drawing
+     */
     @Override
     public void draw(Graphics g) {
         if (debugMode) {

@@ -39,6 +39,9 @@ public class Obstacles implements Drawable {
         initFirstObstacles();
     }
 
+    /**
+     * Initializes the first set of obstacles.
+     */
     private void initFirstObstacles() {
         incomingObstacles = new ArrayList<>();
 
@@ -55,6 +58,11 @@ public class Obstacles implements Drawable {
         }
     }
 
+    /**
+     * Generates a random obstacle image.
+     *
+     * @return a new ObstacleImage with a randomly selected image and space
+     */
     private ObstacleImage getRandomObstacle() {
         int randCactus = (int) (Math.random() * (OBSTACLE_IMAGES.size()));
         ObstacleImage randObstacle = OBSTACLE_IMAGES.get(randCactus);
@@ -62,6 +70,12 @@ public class Obstacles implements Drawable {
         return new ObstacleImage(randObstacle.getOBSTACLE_IMAGE(), getRandomSpace());
     }
 
+    /**
+     * Generate a random obstacle image at the given x coordinate.
+     *
+     * @param x the x coordinate for the obstacle image
+     * @return the randomly generated obstacle image
+     */
     private ObstacleImage getRandomObstacle(int x) {
         int randCactus = (int) (Math.random() * (OBSTACLE_IMAGES.size()));
         ObstacleImage randObstacle = OBSTACLE_IMAGES.get(randCactus);
@@ -73,6 +87,11 @@ public class Obstacles implements Drawable {
         return (int) (Math.random() * RANGE_SPACE_BETWEEN_OBSTACLES) + OBSTACLES_MIN_SPACE_BETWEEN;
     }
 
+    /**
+     * Checks if there is a collision between Mario and any incoming obstacles.
+     *
+     * @return true if there is a collision, false otherwise
+     */
     public boolean isCollision() {
         for (ObstacleImage obstacle : incomingObstacles) {
             for (Coordinates marioCoordinates : Mario.constructedCoordinates)
@@ -104,6 +123,12 @@ public class Obstacles implements Drawable {
         }
     }
 
+    /**
+     * Draws the incoming obstacles on the graphics object.
+     *
+     * @param g the graphics object to draw on
+     * @return void
+     */
     @Override
     public void draw(Graphics g) {
         for (ObstacleImage obstacle : incomingObstacles) {

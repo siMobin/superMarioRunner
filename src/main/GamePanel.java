@@ -56,6 +56,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         mainThread.start();
     }
 
+    /**
+     * Start the game by setting running to true and hiding the intro user
+     * interface.
+     */
     public void startGame() {
         System.out.println("\nGame log");
         System.out.println("-----------------------------------------------------");
@@ -65,6 +69,17 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         introUI.setVisible(false);
     }
 
+    /**
+     * Resets the game by resetting all the game variables and starting a new game.
+     *
+     * This function sets the gameOver and running flags to false and true
+     * respectively.
+     * It also resets the gameSpeed to the initial value.
+     * The scoreUI, mario, obstacles, ground, and background are reset.
+     * If Mario is the player, the introUI.overworld sound is played in loop.
+     * The mario.gameOverSound is stopped if it is open.
+     * A new mainThread is created and started.
+     */
     public void resetGame() {
         gameOver = false;
         running = true;
@@ -103,6 +118,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener {
         }
     }
 
+    /**
+     * @Experimental!
+     *                Changes the game speed if the score is greater than 0 and is a
+     *                multiple of 260, and the game speed has not already been
+     *                changed
+     *                and is less than the maximum game speed.
+     *
+     * @return void
+     */
     private void changeGameSpeed() {
         if (Score.score > 0 && Score.score % 260 == 0 && !isGameSpeedChanged && gameSpeed < GAME_MAX_SPEED) {
             isGameSpeedChanged = true;

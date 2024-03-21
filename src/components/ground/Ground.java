@@ -10,9 +10,9 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Ground implements Drawable {
-    private static final int GROUND_Y_IMAGE_OFFSET = -9;
+    private static final int GROUND_Y_IMAGE_OFFSET = -9; // Ground y image offset
     private static final BufferedImage GROUND_IMAGE = new Resource().getResourceImage("/assets/Ground-2.png");
-    public static final int GROUND_Y = 180;
+    public static final int GROUND_Y = 220; // Ground y position
 
     private static ArrayList<ComponentImage> groundImages;
 
@@ -24,6 +24,11 @@ public class Ground implements Drawable {
         groundInit();
     }
 
+    /**
+     * Initializes the ground by creating a new ArrayList and adding
+     * the ground images to it. Also initializes the first and
+     * second ground images.
+     */
     private void groundInit() {
         groundImages = new ArrayList<>();
 
@@ -47,6 +52,12 @@ public class Ground implements Drawable {
         }
     }
 
+    /**
+     * Draws the ground images on the graphics object.
+     *
+     * @param g the graphics object on which to draw
+     * @return void
+     */
     public void draw(Graphics g) {
         for (ComponentImage ground : groundImages) {
             if (GamePanel.debugMode) {
