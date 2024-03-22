@@ -18,11 +18,11 @@ public class Mario implements Drawable {
 
     private static MarioStates marioState = MarioStates.IDLE;
 
-    private static BufferedImage idleImage = new Resource().getResourceImage("/assets/mario/Mario-jump.png");
-    private static BufferedImage jumpImage = new Resource().getResourceImage("/assets/mario/Mario-jump.png");
-    private static BufferedImage fallImage = new Resource().getResourceImage("/assets/mario/Mario-jump.png");
+    private static BufferedImage idleImage = new Resource().getResourceImage("/mario/Mario-jump.png");
+    private static BufferedImage jumpImage = new Resource().getResourceImage("/mario/Mario-jump.png");
+    private static BufferedImage fallImage = new Resource().getResourceImage("/mario/Mario-jump.png");
     private static Animation runAnimation = new Animation(MARIO_RUNNING_ANIMATION_DELTA_TIME);
-    private static BufferedImage dieImage = new Resource().getResourceImage("/assets/mario/Mario-dead.png");
+    private static BufferedImage dieImage = new Resource().getResourceImage("/mario/Mario-dead.png");
 
     /**
      * Collision adjustments.
@@ -56,8 +56,8 @@ public class Mario implements Drawable {
      */
     public boolean jumpRequested;
 
-    private static Sound jumpSound = new Sound("/assets/sounds/mario/jump.wav");
-    public Sound gameOverSound = new Sound("/assets/sounds/mario/dead.wav");
+    private static Sound jumpSound = new Sound("/mario/jump.wav");
+    public Sound gameOverSound = new Sound("/mario/dead.wav");
 
     /**
      * Constructor for the Mario class.
@@ -70,10 +70,7 @@ public class Mario implements Drawable {
     // ResizeImage
     public Mario() {
         for (int i = 0; i <= MARIO_FRAME; i++) {
-            runAnimation
-                    .addFrame(ResizeImage.getResizedImage("/assets/marioFrame/frame_" + i + "_delay-0.04s.png", 50));
-            // runAnimation.addFrame(ResizeImage.getResizedImage("/assets/marioFrame/f1
-            // (2).png", 50));
+            runAnimation.addFrame(ResizeImage.getResizedImage("/marioFrame/frame_" + i + ".png", 50));
         }
         // Add more @Animation addFrame
 
@@ -148,26 +145,14 @@ public class Mario implements Drawable {
         System.out.println("\nSetting up mario...\n\n");
         // MARIO_RUNNING_ANIMATION_DELTA_TIME = 100;
 
-        idleImage = new Resource().getResourceImage("/assets/mario/Mario-welcome.png");
-        jumpImage = new Resource().getResourceImage("/assets/mario/Mario-jump.png");
-        fallImage = new Resource().getResourceImage("/assets/mario/Mario-fall.png");
+        idleImage = new Resource().getResourceImage("/mario/Mario-welcome.png");
+        jumpImage = new Resource().getResourceImage("/mario/Mario-jump.png");
+        fallImage = new Resource().getResourceImage("/mario/Mario-fall.png");
         runAnimation = new Animation(MARIO_RUNNING_ANIMATION_DELTA_TIME);
-        // runAnimation.addFrame(new
-        // Resource().getResourceImage("/assets/mario/Mario-left-up.png"));
-        // runAnimation.addFrame(new
-        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
-        // runAnimation.addFrame(new
-        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
-        // runAnimation.addFrame(new
-        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
-        // runAnimation.addFrame(new
-        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
-        // runAnimation.addFrame(new
-        // Resource().getResourceImage("/assets/mario/Mario-right-up.png"));
-        dieImage = new Resource().getResourceImage("/assets/mario/Mario-dead.png");
+        dieImage = new Resource().getResourceImage("/mario/Mario-dead.png");
 
-        jumpSound = new Sound("/assets/sounds/mario/jump.wav");
-        gameOverSound = new Sound("/assets/sounds/mario/dead.wav");
+        jumpSound = new Sound("/mario/jump.wav");
+        gameOverSound = new Sound("/mario/dead.wav");
 
         constructedCoordinates = new ArrayList<>();
         constructedCoordinates.add(new Coordinates((int) X, (int) y,
@@ -212,6 +197,16 @@ public class Mario implements Drawable {
         }
     }
 
+    /**
+     * Updates the position and state of the Mario character based on its current
+     * speed and the state of the game.
+     * If Mario is on the ground, his speed is set to 0 and he runs. If a jump was
+     * requested, Mario jumps.
+     * If Mario is in the air, his speed increases due to gravity and his position
+     * is updated accordingly.
+     * The Mario character's coordinates are updated based on its current position
+     * and collision data.
+     */
     @Override
     public void update() {
         if ((TEMP_y + speedY) >= GROUND_Y - idleImage.getHeight()) {
@@ -245,6 +240,10 @@ public class Mario implements Drawable {
         }
     }
 
+    /**
+     * Resets the object's y position to the ground level and calls the run()
+     * method.
+     */
     @Override
     public void reset() {
         y = GROUND_Y - idleImage.getHeight();

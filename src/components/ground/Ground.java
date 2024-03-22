@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Ground implements Drawable {
-    private static final BufferedImage GROUND_IMAGE = new Resource().getResourceImage("/assets/Ground-2.png");
+    private static final BufferedImage GROUND_IMAGE = new Resource().getResourceImage("/Ground-2.png");
 
     private static ArrayList<ComponentImage> groundImages;
 

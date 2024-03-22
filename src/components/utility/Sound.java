@@ -1,31 +1,39 @@
 package components.utility;
 
 import javax.sound.sampled.*;
-import java.net.URL;
-
-/**
- * Resources:
- *  - https://stackoverflow.com/questions/2416935/how-to-play-wav-files-with-java
- */
+import java.io.File;
 
 public class Sound {
-    private final URL path;
+    private final File file;
 
     private Clip clip;
     private AudioInputStream ais;
     private LineListener event;
 
-    public Sound(String path) {
-        this.path = getClass().getResource(path);
-        System.out.println("Sound loaded: " + getClass().getResource(path));
+    public Sound(String fileName) {
+        // Construct the file path relative to the project's root directory
+        this.file = new File("lib/audio/" + fileName);
+        // Print out the file path for debugging purposes
+        System.out.println("Audio: " + fileName);
     }
 
+    /**
+     * Plays the audio file.
+     *
+     * This function initializes the audio input stream and clip, sets up a line
+     * event listener to handle the clip's stop event,
+     * opens the clip with the audio input stream, and starts the clip.
+     *
+     * @throws Exception if there is an error in initializing the audio input stream
+     *                   or clip.
+     */
     public void play() {
         try {
-            ais = AudioSystem.getAudioInputStream(path);
+            ais = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             event = event -> {
-                if (event.getType() == LineEvent.Type.STOP) clip.close();
+                if (event.getType() == LineEvent.Type.STOP)
+                    clip.close();
             };
             clip.addLineListener(event);
             clip.open(ais);
@@ -35,9 +43,12 @@ public class Sound {
         }
     }
 
+    /**
+     * A method to play the audio file in a continuous loop.
+     */
     public void playInLoop() {
         try {
-            ais = AudioSystem.getAudioInputStream(path);
+            ais = AudioSystem.getAudioInputStream(file);
             clip = AudioSystem.getClip();
             clip.open(ais);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -58,10 +69,20 @@ public class Sound {
         clip.stop();
     }
 
+    /**
+     * Check if the object is open.
+     *
+     * @return true if the object is open, false otherwise
+     */
     public boolean isOpen() {
         return clip.isOpen();
     }
 
+    /**
+     * Checks if the clip is null.
+     *
+     * @return true if the clip is null, false otherwise
+     */
     public boolean isNull() {
         return clip == null;
     }

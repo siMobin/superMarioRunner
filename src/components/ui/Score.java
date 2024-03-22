@@ -9,13 +9,12 @@ import java.awt.*;
 import java.io.*;
 
 import static main.GamePanel.gameSpeed;
-// import static main.GameWindow.WINDOW_WIDTH;
 
 public class Score implements Drawable {
     private static final int SCORE_DELTA_TIME = 100 / gameSpeed * 5;
 
     private static final DeltaTime DELTA_TIME = new DeltaTime(SCORE_DELTA_TIME);
-    private static final Sound SCORE_SOUND = new Sound("/assets/sounds/score-reached.wav");
+    private static final Sound SCORE_SOUND = new Sound("/score-reached.wav");
 
     private static boolean isPlayed = false;
 
@@ -25,6 +24,12 @@ public class Score implements Drawable {
     public Score() {
     }
 
+    /**
+     * Builds a score string with leading zeros.
+     *
+     * @param score the score to be formatted
+     * @return the formatted score string
+     */
     private String scoreBuilder(int score) {
         StringBuilder ret = new StringBuilder(Integer.toString(score));
         char zero = '0';
@@ -47,15 +52,35 @@ public class Score implements Drawable {
         return highScore < score;
     }
 
+    /**
+     * Returns a string representation of the given score. If the score is greater
+     * than the maximum high score,
+     * it returns the string representation of the maximum high score. Otherwise, it
+     * returns the string
+     * representation of the score using the scoreBuilder method.
+     *
+     * @param score the score to be converted to a string
+     * @return the string representation of the score
+     */
     private String printScore(int score) {
         return score > SCORE_MAX_HIGH_SCORE ? Integer.toString(SCORE_MAX_HIGH_SCORE) : scoreBuilder(score);
     }
 
+    /**
+     * Checks the existence of a file.
+     *
+     * @return true if the file exists, false otherwise
+     */
     private static boolean checkFileExistence() {
         File file = new File(SCORE_FILE_NAME);
         return file.exists();
     }
 
+    /**
+     * Reads the high score from a file if it exists, and returns it as an integer.
+     *
+     * @return the high score as an integer
+     */
     private static int readHighScore() {
         long highScore = 0;
         if (checkFileExistence()) {
@@ -100,6 +125,14 @@ public class Score implements Drawable {
         }
     }
 
+    /**
+     * Updates the state of the object.
+     *
+     * This method is called to update the state of the object. It checks if the
+     * delta time is available to execute the update. If it is, it sets the isPlayed
+     * flag to false, sets the isGameSpeedChanged flag to false, increments the
+     * score by 1, and plays the sound.
+     */
     @Override
     public void update() {
         if (DELTA_TIME.canExecute()) {
@@ -110,6 +143,11 @@ public class Score implements Drawable {
         }
     }
 
+    /**
+     * Draws the score and high score on the graphics object.
+     *
+     * @param g the graphics object on which to draw
+     */
     @Override
     public void draw(Graphics g) {
         g.setColor(Color.GRAY);
@@ -119,6 +157,10 @@ public class Score implements Drawable {
         g.drawString("HI " + printScore(highScore), WINDOW_WIDTH - 200, 40);
     }
 
+    /**
+     * Resets the score to 0.
+     *
+     */
     @Override
     public void reset() {
         score = 0;

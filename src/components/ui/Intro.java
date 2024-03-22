@@ -10,11 +10,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
 public class Intro implements Drawable {
-    private static BufferedImage text = new Resource().getResourceImage("/assets/Intro-mario.png");
+    private static BufferedImage text = new Resource().getResourceImage("/Intro-mario.png");
 
     public JLabel introLabel = new JLabel();
 
-    public final Sound overworld = new Sound("/assets/sounds/mario/overworld.wav");
+    public final Sound overworld = new Sound("/mario/overworld.wav");
 
     public Intro() {
         introLabel.setBounds((WINDOW_WIDTH - text.getWidth()) / 2, (WINDOW_HEIGHT - text.getHeight()) / 2 - 50,
@@ -29,14 +29,20 @@ public class Intro implements Drawable {
         });
     }
 
+    /**
+     * Sets the visibility of the intro label.
+     *
+     * @param val the new visibility value
+     */
     public void setVisible(boolean val) {
         introLabel.setVisible(val);
     }
 
-    // public void changeIntroTextToMario() {
-    // text = new Resource().getResourceImage("/assets/Intro-mario.png");
-    // }
-
+    /**
+     * Draws an image on the graphics context at the center of the window.
+     *
+     * @param g the graphics context to draw on
+     */
     @Override
     public void draw(Graphics g) {
         g.drawImage(text, (WINDOW_WIDTH - text.getWidth()) / 2, (WINDOW_HEIGHT - text.getHeight()) / 2 - 50, null);

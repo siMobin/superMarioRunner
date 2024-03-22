@@ -17,12 +17,12 @@ public class Obstacles implements Drawable {
     private ArrayList<ObstacleImage> incomingObstacles;
 
     public Obstacles() {
-        ObstacleImage enemy_1 = new ObstacleImage(new Resource().getResourceImage("/assets/obstacles/Cactus-1-c.png"));
-        ObstacleImage enemy_2 = new ObstacleImage(new Resource().getResourceImage("/assets/obstacles/Cactus-2-c.png"));
-        ObstacleImage enemy_3 = new ObstacleImage(new Resource().getResourceImage("/assets/obstacles/shit.png"));
-        ObstacleImage enemy_5 = new ObstacleImage(new Resource().getResourceImage("/assets/obstacles/tree-root-1.png"));
-        ObstacleImage enemy_6 = new ObstacleImage(new Resource().getResourceImage("/assets/obstacles/mushroom-1.png"));
-        ObstacleImage enemy_4 = new ObstacleImage(new Resource().getResourceImage("/assets/obstacles/mushroom-2.png"));
+        ObstacleImage enemy_1 = new ObstacleImage(new Resource().getResourceImage("/obstacles/Cactus-1-c.png"));
+        ObstacleImage enemy_2 = new ObstacleImage(new Resource().getResourceImage("/obstacles/Cactus-2-c.png"));
+        ObstacleImage enemy_3 = new ObstacleImage(new Resource().getResourceImage("/obstacles/shit.png"));
+        ObstacleImage enemy_5 = new ObstacleImage(new Resource().getResourceImage("/obstacles/tree-root-1.png"));
+        ObstacleImage enemy_6 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-1.png"));
+        ObstacleImage enemy_4 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-2.png"));
 
         OBSTACLE_IMAGES.add(enemy_1);
         OBSTACLE_IMAGES.add(enemy_2);
@@ -78,6 +78,11 @@ public class Obstacles implements Drawable {
         return new ObstacleImage(randObstacle.getOBSTACLE_IMAGE(), x, getRandomSpace());
     }
 
+    /**
+     * A method to return a random space between obstacles.
+     *
+     * @return the random space between obstacles
+     */
     private int getRandomSpace() {
         return (int) (Math.random() * RANGE_SPACE_BETWEEN_OBSTACLES) + OBSTACLES_MIN_SPACE_BETWEEN;
     }
@@ -97,6 +102,12 @@ public class Obstacles implements Drawable {
         return false;
     }
 
+    /**
+     * Resets the function by initializing the first obstacles.
+     *
+     * @param None
+     * @return None
+     */
     @Override
     public void reset() {
         initFirstObstacles();

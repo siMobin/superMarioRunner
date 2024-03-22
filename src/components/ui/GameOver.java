@@ -6,8 +6,8 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class GameOver implements Drawable {
-    private static final BufferedImage text = new Resource().getResourceImage("/assets/Game-over.png");
-    private static final BufferedImage restartButton = new Resource().getResourceImage("/assets/Restart.png");
+    private static final BufferedImage text = new Resource().getResourceImage("/Game-over.png");
+    private static final BufferedImage restartButton = new Resource().getResourceImage("/Restart.png");
 
     public GameOver() {
         //
@@ -18,6 +18,11 @@ public class GameOver implements Drawable {
         //
     }
 
+    /**
+     * Draws the game over screen with the given graphics object.
+     *
+     * @param g the graphics object used for drawing
+     */
     @Override
     public void draw(Graphics g) {
         g.drawImage(text, (WINDOW_WIDTH - text.getWidth()) / 2, (WINDOW_HEIGHT - text.getHeight()) / 2 - 70, null);

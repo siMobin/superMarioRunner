@@ -12,8 +12,8 @@ import java.util.ArrayList;
 import static main.GamePanel.*;
 
 public class Background implements Drawable {
-    private static final BufferedImage CLOUD_IMAGE = new Resource().getResourceImage("/assets/Cloud.png");
-    private static final BufferedImage CLOUD_IMAGE_2 = new Resource().getResourceImage("/assets/Cloud-2.png");
+    private static final BufferedImage CLOUD_IMAGE = new Resource().getResourceImage("/Cloud.png");
+    private static final BufferedImage CLOUD_IMAGE_2 = new Resource().getResourceImage("/Cloud-2.png");
 
     private final int backgroundSpeed = gameSpeed / 5;
 
@@ -42,6 +42,11 @@ public class Background implements Drawable {
         this.backgroundColor = backgroundColor;
     }
 
+    /**
+     * Initializes the background by adding cloud images to the cloudImages list.
+     *
+     * @return void
+     */
     private void backgroundInit() {
         cloudImages = new ArrayList<>();
         cloudImages.add(firstCloud);
