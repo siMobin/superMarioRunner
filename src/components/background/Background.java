@@ -10,8 +10,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import static main.GamePanel.*;
-import static main.GameWindow.WINDOW_HEIGHT;
-import static main.GameWindow.WINDOW_WIDTH;
 
 public class Background implements Drawable {
     private static final BufferedImage CLOUD_IMAGE = new Resource().getResourceImage("/assets/Cloud.png");

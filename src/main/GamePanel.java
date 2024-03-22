@@ -8,21 +8,15 @@ import components.ui.GameOver;
 import components.ui.Intro;
 import components.ui.Paused;
 import components.ui.Score;
+import interfaces.GameSettings;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import static main.GameWindow.WINDOW_HEIGHT;
-import static main.GameWindow.WINDOW_WIDTH;
-
-public class GamePanel extends JPanel implements Runnable, KeyListener {
-    private static final int GAME_START_SPEED = 5;
+public class GamePanel extends JPanel implements Runnable, KeyListener, GameSettings {
     private static final int GAME_FPS = 60;
-    private static final int GAME_MAX_SPEED = 12;
-
-    public static final float GAME_GRAVITY = 0.64f;
 
     private Thread mainThread = new Thread(this);
 

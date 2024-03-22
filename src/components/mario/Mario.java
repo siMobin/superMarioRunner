@@ -2,24 +2,15 @@ package components.mario;
 
 import components.utility.*;
 import interfaces.Drawable;
-// import interfaces.GameSettings;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import static components.ground.Ground.GROUND_Y;
 import static main.GamePanel.debugMode;
-import static main.GamePanel.GAME_GRAVITY;
 
 public class Mario implements Drawable {
-    private static final int MARIO_JUMP_STRENGTH = 13;
-    private static final int MARIO_FALL_STRENGTH = 8;
-    private static final float MARIO_START_X = 50;
-    private static int MARIO_RUNNING_ANIMATION_DELTA_TIME = 60;
     private static final int MARIO_BORDER_SIZE = 1;
-    static final float MARIO_FRAME = 11;
-
     private static final float X = MARIO_START_X;
 
     public static boolean isMario = false;

@@ -9,13 +9,10 @@ import java.awt.*;
 import java.io.*;
 
 import static main.GamePanel.gameSpeed;
-import static main.GameWindow.WINDOW_WIDTH;
+// import static main.GameWindow.WINDOW_WIDTH;
 
 public class Score implements Drawable {
-    private static final String SCORE_FILE_NAME = "highscore.txt";
-    private static final int SCORE_MAX_ZEROS = 5;
     private static final int SCORE_DELTA_TIME = 100 / gameSpeed * 5;
-    private static final int SCORE_MAX_HIGH_SCORE = 99999;
 
     private static final DeltaTime DELTA_TIME = new DeltaTime(SCORE_DELTA_TIME);
     private static final Sound SCORE_SOUND = new Sound("/assets/sounds/score-reached.wav");
@@ -25,7 +22,8 @@ public class Score implements Drawable {
     private static int highScore = readHighScore();
     public static int score = 0;
 
-    public Score() { }
+    public Score() {
+    }
 
     private String scoreBuilder(int score) {
         StringBuilder ret = new StringBuilder(Integer.toString(score));
@@ -39,7 +37,7 @@ public class Score implements Drawable {
     }
 
     private void playSound() {
-        if (score > 0 && score%100 == 0 && !isPlayed) {
+        if (score > 0 && score % 100 == 0 && !isPlayed) {
             isPlayed = true;
             SCORE_SOUND.play();
         }
@@ -48,6 +46,7 @@ public class Score implements Drawable {
     private boolean isHighScore() {
         return highScore < score;
     }
+
     private String printScore(int score) {
         return score > SCORE_MAX_HIGH_SCORE ? Integer.toString(SCORE_MAX_HIGH_SCORE) : scoreBuilder(score);
     }
@@ -76,12 +75,15 @@ public class Score implements Drawable {
      * https://stackoverflow.com/questions/12350248/java-difference-between-filewriter-and-bufferedwriter
      * -------------------------------------------------------------------------------------------------------
      * BufferedWriter is more efficient if you
-     *  - have multiple writes between flush/close
-     *  - ! the writes are small compared with the buffer size.
+     * - have multiple writes between flush/close
+     * - ! the writes are small compared with the buffer size.
      * -------------------------------------------------------------------------------------------------------
-     * BufferedWriter is more efficient. It saves up small writes and writes in one larger chunk if memory
-     * serves me correctly. If you are doing lots of small writes then I would use BufferedWriter. Calling
-     * write calls to the OS which is slow so having as few writes as possible is usually desirable.
+     * BufferedWriter is more efficient. It saves up small writes and writes in one
+     * larger chunk if memory
+     * serves me correctly. If you are doing lots of small writes then I would use
+     * BufferedWriter. Calling
+     * write calls to the OS which is slow so having as few writes as possible is
+     * usually desirable.
      * -------------------------------------------------------------------------------------------------------
      */
     public void writeHighScore() {

@@ -1,20 +1,16 @@
 package main;
 
 import javax.swing.*;
+
+import interfaces.GameSettings;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameWindow {
-    private static final String WINDOW_TITLE = "Supper Mario";
-    private static final boolean WINDOW_RESIZABLE = false;
-    private static final boolean WINDOW_ALWAYS_ON_TOP = false;
-
-    public static final int WINDOW_WIDTH = 800;
-    public static final int WINDOW_HEIGHT = 260;
-
+public class GameWindow implements GameSettings {
     // Define framerate
-    private static final int FPS = 360;
-    private static final long FRAME_TIME = (long) (1000.0 / FPS);
+    // private static final int FPS = 360;
+    private static final long FRAME_TIME = (long) (1000.0 / GAME_FPS);
 
     public GameWindow() {
         JFrame mainGameWindow = new JFrame(WINDOW_TITLE);

@@ -9,9 +9,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
-import static main.GameWindow.WINDOW_HEIGHT;
-import static main.GameWindow.WINDOW_WIDTH;
-
 public class Intro implements Drawable {
     private static BufferedImage text = new Resource().getResourceImage("/assets/Intro-mario.png");
 

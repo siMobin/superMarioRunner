@@ -10,15 +10,10 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Obstacles implements Drawable {
-    private static final int OBSTACLES_MIN_SPACE_BETWEEN = 250;
-    private static final int OBSTACLES_MAX_SPACE_BETWEEN = 500;
-    private static final int OBSTACLES_FIRST_OBSTACLE_X = 600;
     private static final int RANGE_SPACE_BETWEEN_OBSTACLES = OBSTACLES_MAX_SPACE_BETWEEN - OBSTACLES_MIN_SPACE_BETWEEN
             + 1;
-
     private static final ArrayList<ObstacleImage> OBSTACLE_IMAGES = new ArrayList<>();
 
-    private static final int MAX_INCOMING_OBSTACLES = 5;
     private ArrayList<ObstacleImage> incomingObstacles;
 
     public Obstacles() {
@@ -107,6 +102,21 @@ public class Obstacles implements Drawable {
         initFirstObstacles();
     }
 
+    /**
+     * Updates the position of the incoming obstacles and generates new obstacles
+     * when the first one goes off the screen.
+     *
+     * This function iterates over each obstacle in the incomingObstacles list and
+     * updates its x-coordinate by subtracting the game speed.
+     * If the first obstacle goes off the screen (i.e., its x-coordinate is less
+     * than - its width), a new obstacle is generated.
+     * The last obstacle in the list is used to determine the position and space
+     * behind the new obstacle.
+     * The first obstacle in the list is removed from the list, and a new obstacle
+     * is added at the end of the list with a random position and space behind.
+     *
+     * @return void
+     */
     @Override
     public void update() {
         for (ObstacleImage obstacle : incomingObstacles) {
@@ -124,20 +134,41 @@ public class Obstacles implements Drawable {
     }
 
     /**
-     * Draws the incoming obstacles on the graphics object.
+     * Draw existing obstacles on the graphics object. Check for collision with
+     * Mario and remove obstacles that are out of the screen.
      *
-     * @param g the graphics object to draw on
+     * @param g the Graphics object to draw on
      * @return void
      */
     @Override
     public void draw(Graphics g) {
-        for (ObstacleImage obstacle : incomingObstacles) {
+        // Draw existing obstacles
+        for (int i = 0; i < incomingObstacles.size(); i++) {
+            ObstacleImage obstacle = incomingObstacles.get(i);
             if (GamePanel.debugMode) {
                 g.setColor(obstacle.getDebugColor());
                 g.drawRect(obstacle.coordinates.x, obstacle.coordinates.y, obstacle.coordinates.width,
                         obstacle.coordinates.height);
             }
             g.drawImage(obstacle.getOBSTACLE_IMAGE(), obstacle.getX(), obstacle.getY(), null);
+
+            // Check for collision with Mario
+            // for (Coordinates marioCoordinates : Mario.constructedCoordinates) {
+            // if (marioCoordinates.intersects(obstacle.coordinates)) {
+            // // Handle collision here, for example:
+            // // gameOver(); // Call a method to end the game
+            // }
+            // }
+
+            // If the obstacle is out of the screen, remove it and add a new one
+            if (obstacle.getX() < -obstacle.getOBSTACLE_IMAGE().getWidth()) {
+                incomingObstacles.remove(i);
+                i--; // Decrement i because we removed an obstacle
+                ObstacleImage lastIncomingObstacle = incomingObstacles.get(incomingObstacles.size() - 1);
+                incomingObstacles
+                        .add(getRandomObstacle(lastIncomingObstacle.getX() + lastIncomingObstacle.getSpaceBehind()));
+                incomingObstacles.get(incomingObstacles.size() - 1).setSpaceBehind(getRandomSpace());
+            }
         }
     }
 }

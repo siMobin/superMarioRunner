@@ -5,9 +5,6 @@ import components.utility.Resource;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import static main.GameWindow.WINDOW_HEIGHT;
-import static main.GameWindow.WINDOW_WIDTH;
-
 public class GameOver implements Drawable {
     private static final BufferedImage text = new Resource().getResourceImage("/assets/Game-over.png");
     private static final BufferedImage restartButton = new Resource().getResourceImage("/assets/Restart.png");

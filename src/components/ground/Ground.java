@@ -10,9 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Ground implements Drawable {
-    private static final int GROUND_Y_IMAGE_OFFSET = -9; // Ground y image offset
     private static final BufferedImage GROUND_IMAGE = new Resource().getResourceImage("/assets/Ground-2.png");
-    public static final int GROUND_Y = 220; // Ground y position
 
     private static ArrayList<ComponentImage> groundImages;
 
