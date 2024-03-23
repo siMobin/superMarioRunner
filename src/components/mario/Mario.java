@@ -17,10 +17,11 @@ public class Mario implements Drawable {
     public static boolean marioLoaded = false;
 
     private static MarioStates marioState = MarioStates.IDLE;
+    private final static BufferedImage jump = ResizeImage.getResizedImage("/mario/jump.png", 50);
 
-    private static BufferedImage idleImage = new Resource().getResourceImage("/mario/Mario-jump.png");
-    private static BufferedImage jumpImage = new Resource().getResourceImage("/mario/Mario-jump.png");
-    private static BufferedImage fallImage = new Resource().getResourceImage("/mario/Mario-jump.png");
+    private static BufferedImage idleImage = jump;
+    private static BufferedImage jumpImage = jump;
+    private static BufferedImage fallImage = jump;
     private static Animation runAnimation = new Animation(MARIO_RUNNING_ANIMATION_DELTA_TIME);
     private static BufferedImage dieImage = new Resource().getResourceImage("/mario/Mario-dead.png");
 
@@ -136,30 +137,6 @@ public class Mario implements Drawable {
      */
     public boolean isInAir() {
         return marioState == MarioStates.JUMPING || marioState == MarioStates.FALL;
-    }
-
-    /**
-     * Set up the Mario character with all required resources and sounds.
-     */
-    public void setMario() {
-        System.out.println("\nSetting up mario...\n\n");
-        // MARIO_RUNNING_ANIMATION_DELTA_TIME = 100;
-
-        idleImage = new Resource().getResourceImage("/mario/Mario-welcome.png");
-        jumpImage = new Resource().getResourceImage("/mario/Mario-jump.png");
-        fallImage = new Resource().getResourceImage("/mario/Mario-fall.png");
-        runAnimation = new Animation(MARIO_RUNNING_ANIMATION_DELTA_TIME);
-        dieImage = new Resource().getResourceImage("/mario/Mario-dead.png");
-
-        jumpSound = new Sound("/mario/jump.wav");
-        gameOverSound = new Sound("/mario/dead.wav");
-
-        constructedCoordinates = new ArrayList<>();
-        constructedCoordinates.add(new Coordinates((int) X, (int) y,
-                idleImage.getWidth(), idleImage.getHeight()));
-
-        marioLoaded = true;
-        System.out.println("Mario has been set up\n\n");
     }
 
     /**

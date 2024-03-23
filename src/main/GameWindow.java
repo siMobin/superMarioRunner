@@ -1,15 +1,13 @@
 package main;
 
 import javax.swing.*;
-
-import interfaces.GameSettings;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import interfaces.GameSettings;
+
 public class GameWindow implements GameSettings {
-    // Define framerate
-    // private static final int FPS = 360;
+    // Timing...
     private static final long FRAME_TIME = (long) (1000.0 / GAME_FPS);
 
     public GameWindow() {
@@ -23,11 +21,10 @@ public class GameWindow implements GameSettings {
         mainGameWindow.addKeyListener(gamePanel);
 
         mainGameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Set custom icon
-        // ImageIcon icon = new ImageIcon("/assets/mario/Mario-fall.png");
-        // mainGameWindow.setIconImage(icon.getImage());
-
+        // Set the icon image for the JFrame
+        ImageIcon icon = new ImageIcon("lib/icon_sm.png"); // app icon
+        mainGameWindow.setIconImage(icon.getImage());
+        // Set the window to the screen
         mainGameWindow.setLocationRelativeTo(null);
         mainGameWindow.setVisible(true);
         mainGameWindow.setAlwaysOnTop(WINDOW_ALWAYS_ON_TOP);
@@ -37,9 +34,9 @@ public class GameWindow implements GameSettings {
     }
 
     /**
-     * Method to start the game loop.
+     * Starts the game loop for the given game panel.
      *
-     * @param gamePanel the game panel to be updated and rendered
+     * @param gamePanel the game panel to start the game loop for
      */
     private void startGameLoop(GamePanel gamePanel) {
         Timer timer = new Timer((int) FRAME_TIME, new ActionListener() {

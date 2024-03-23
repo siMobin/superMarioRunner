@@ -60,7 +60,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
 
         running = true;
         intro = false;
-        introUI.setVisible(false);
     }
 
     /**
@@ -174,11 +173,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            if (Mario.isMario && !Mario.marioLoaded) {
-                mario.setMario();
-            }
-
             repaint();
         }
 
@@ -218,7 +212,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
                 running = false;
                 System.out.println("Game over");
             }
-
             // RENDER OUTPUT
             repaint();
         }
