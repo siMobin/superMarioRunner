@@ -13,7 +13,7 @@ public class Intro implements Drawable {
 
     public JLabel introLabel = new JLabel();
 
-    public final Sound overworld = new Sound("/overworld.wav");
+    public Sound overworld = new Sound("/overworld.wav");
 
     public Intro() {
         introLabel.setBounds((WINDOW_WIDTH - image.getWidth()) / 2,
@@ -33,6 +33,12 @@ public class Intro implements Drawable {
         g.drawImage(image, (WINDOW_WIDTH - image.getWidth()) / 2, (WINDOW_HEIGHT - image.getHeight()) / 2 - 50, null);
     }
 
+    /**
+     * Unimplemented methods from @interface.Drawable
+     * 
+     * @see components.Drawable#update()
+     * @see components.Drawable#reset()
+     */
     @Override
     public void update() {
         // TODO Auto-generated method stub

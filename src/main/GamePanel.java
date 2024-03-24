@@ -16,7 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener, GameSettings {
-    private static final int game_fps = 60;
+    private int game_fps = 60;
 
     private Thread mainThread = new Thread(this);
 
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
     public boolean paused = false;
     public boolean gameOver = false;
     public boolean intro = true;
-    final Object pauseLock = new Object();
+    final Object PAUSE_LOCK = new Object();
 
     Mario mario = new Mario();
     Ground ground = new Ground();
@@ -108,14 +108,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
 
     /**
      * Resumes the game by setting the 'paused' flag to false, stopping the
-     * 'introUI.overworld' and notifying the 'pauseLock' to wake up any waiting
+     * 'introUI.overworld' and notifying the 'PAUSE_LOCK' to wake up any waiting
      * threads. Also prints "Resumed" to the console.
      */
     public void resumeGame() {
-        synchronized (pauseLock) {
+        synchronized (PAUSE_LOCK) {
             paused = false;
             introUI.overworld.stop();
-            pauseLock.notify();
+            PAUSE_LOCK.notify();
             System.out.println("Resumed");
         }
     }
@@ -140,7 +140,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
      * MAIN PAINT METHOD
      * --------------------------------------------------------
      * 
-     * @param g Graphics
+     * Paints the components using the provided Graphics object.
+     *
+     * @param g the Graphics object to paint with
+     * @return void
      */
     @Override
     public void paintComponent(Graphics g) {
@@ -187,16 +190,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
 
         // MAIN GAME LOOP
         while (running) {
-
             // GAME TIMING
             try {
                 int msPerFrame = 1000 / game_fps;
                 Thread.sleep(msPerFrame);
-
                 if (paused) {
-                    synchronized (pauseLock) {
+                    synchronized (PAUSE_LOCK) {
                         repaint();
-                        pauseLock.wait();
+                        PAUSE_LOCK.wait();
                     }
                 }
             } catch (InterruptedException e) {
@@ -205,7 +206,6 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
 
             // GAME LOGIC
             changeGameSpeed();
-
             scoreUI.update();
             background.update();
             mario.update();
@@ -246,7 +246,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         }
 
         // JUMP
-        if (e.getKeyChar() == ' ' || e.getKeyChar() == 'w' || e.getKeyCode() == KeyEvent.VK_UP) {
+        if (e.getKeyChar() == ' ' || e.getKeyChar() == 'w' || e.getKeyChar() == 'W'
+                || e.getKeyCode() == KeyEvent.VK_UP) {
             if (!paused && running) {
                 mario.jump();
             } else if (paused && running) {
@@ -263,14 +264,14 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         }
 
         // FALL
-        if (e.getKeyChar() == 's' || e.getKeyCode() == KeyEvent.VK_DOWN) {
+        if (e.getKeyChar() == 's' || e.getKeyChar() == 'S' || e.getKeyCode() == KeyEvent.VK_DOWN) {
             if (!paused && running) {
                 mario.fall();
             }
         }
 
         // PAUSE
-        if (e.getKeyChar() == 'p' || e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+        if (e.getKeyChar() == 'p' || e.getKeyChar() == 'P' || e.getKeyCode() == KeyEvent.VK_ESCAPE) {
             if (!paused && running) {
                 pauseGame();
             } else if (paused && running) {
@@ -288,11 +289,18 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
      */
     @Override
     public void keyReleased(KeyEvent e) {
-        if (e.getKeyChar() == ' ' || e.getKeyChar() == 'w' || e.getKeyCode() == KeyEvent.VK_UP)
+        if (e.getKeyChar() == ' ' || e.getKeyChar() == 'w' || e.getKeyChar() == 'W' || e.getKeyCode() == KeyEvent.VK_UP)
             mario.jumpRequested = false;
     }
 
+    /**
+     * Abstract method from KeyListener.
+     * 
+     * @param e KeyEvent
+     * @see java.awt.event.KeyListener#keyTyped(java.awt.event.KeyEvent)
+     */
     @Override
     public void keyTyped(KeyEvent e) {
+        //
     }
 }

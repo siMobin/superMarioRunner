@@ -13,7 +13,7 @@ import static main.GamePanel.*;
 
 public class Background implements Drawable {
     private static final BufferedImage[] CLOUD_IMAGES;
-    private final int backgroundSpeed = gameSpeed / 5;
+    private final int BACKGROUND_SPEED = gameSpeed / 5;
     private BackgroundColors backgroundColor;
     private static ArrayList<ComponentImage> cloudImages;
 
@@ -61,7 +61,7 @@ public class Background implements Drawable {
     @Override
     public void update() {
         for (ComponentImage cloud : cloudImages) {
-            cloud.x -= backgroundSpeed;
+            cloud.x -= BACKGROUND_SPEED;
             if (cloud.x <= -cloud.image.getWidth()) {
                 cloud.x = WINDOW_WIDTH;
             }

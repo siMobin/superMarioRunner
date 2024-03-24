@@ -10,12 +10,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class Ground implements Drawable {
-    private static final BufferedImage GROUND_IMAGE = new Resource().getResourceImage("/Ground-2.png");
+    private static final BufferedImage GROUND_IMAGE = new Resource().getResourceImage("/Ground.png");
 
     private static ArrayList<ComponentImage> groundImages;
 
-    private static final ComponentImage firstGround = new ComponentImage(GROUND_IMAGE, 0, Color.green);
-    private static final ComponentImage secondGround = new ComponentImage(GROUND_IMAGE, GROUND_IMAGE.getWidth(),
+    private static final ComponentImage FIRST_GROUND = new ComponentImage(GROUND_IMAGE, 0, Color.green);
+    private static final ComponentImage SECOND_GROUND = new ComponentImage(GROUND_IMAGE, GROUND_IMAGE.getWidth(),
             Color.blue);
 
     public Ground() {
@@ -30,23 +30,23 @@ public class Ground implements Drawable {
     private void groundInit() {
         groundImages = new ArrayList<>();
 
-        groundImages.add(firstGround);
-        groundImages.add(secondGround);
+        groundImages.add(FIRST_GROUND);
+        groundImages.add(SECOND_GROUND);
     }
 
     /**
      * @see ComponentImage#x Defines also inequalities arising
-     *      from updating x before changing GroundImage possition (I think)
+     *      from updating x before changing GroundImage position (I think)
      */
     public void update() {
-        firstGround.x -= GamePanel.gameSpeed;
-        secondGround.x -= GamePanel.gameSpeed;
+        FIRST_GROUND.x -= GamePanel.gameSpeed;
+        SECOND_GROUND.x -= GamePanel.gameSpeed;
 
-        if (firstGround.x <= -firstGround.image.getWidth()) {
-            firstGround.x = secondGround.image.getWidth() + secondGround.x;
+        if (FIRST_GROUND.x <= -FIRST_GROUND.image.getWidth()) {
+            FIRST_GROUND.x = SECOND_GROUND.image.getWidth() + SECOND_GROUND.x;
         }
-        if (secondGround.x <= -secondGround.image.getWidth()) {
-            secondGround.x = firstGround.image.getWidth() + firstGround.x;
+        if (SECOND_GROUND.x <= -SECOND_GROUND.image.getWidth()) {
+            SECOND_GROUND.x = FIRST_GROUND.image.getWidth() + FIRST_GROUND.x;
         }
     }
 

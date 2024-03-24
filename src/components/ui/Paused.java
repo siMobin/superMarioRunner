@@ -26,6 +26,12 @@ public class Paused implements Drawable {
                 (WINDOW_HEIGHT - PAUSED_TEXT.getHeight()) / 2 - 70, null);
     }
 
+    /**
+     * The following methods are unimplemented/non-required.
+     *
+     * @see components.Drawable#update()
+     * @see components.Drawable#reset()
+     */
     @Override
     public void update() {
     }

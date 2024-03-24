@@ -8,6 +8,12 @@ public class DeltaTime {
         this.DELTA_TIME = deltaTime;
     }
 
+    /**
+     * Checks if the delta time is available to execute the update. If it is, it
+     * returns true, otherwise it returns false.
+     *
+     * @return
+     */
     public boolean canExecute() {
         if (System.currentTimeMillis() - lastTime > DELTA_TIME) {
             lastTime = System.currentTimeMillis();

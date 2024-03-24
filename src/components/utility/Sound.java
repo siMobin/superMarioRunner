@@ -4,7 +4,7 @@ import javax.sound.sampled.*;
 import java.io.File;
 
 public class Sound {
-    private final File file;
+    private final File FILE;
 
     private Clip clip;
     private AudioInputStream ais;
@@ -12,7 +12,7 @@ public class Sound {
 
     public Sound(String fileName) {
         // Construct the file path relative to the project's root directory
-        this.file = new File("lib/audio/" + fileName);
+        this.FILE = new File("lib/audio/" + fileName);
         // Print out the file path for debugging purposes
         System.out.println("Audio: " + fileName);
     }
@@ -29,7 +29,7 @@ public class Sound {
      */
     public void play() {
         try {
-            ais = AudioSystem.getAudioInputStream(file);
+            ais = AudioSystem.getAudioInputStream(FILE);
             clip = AudioSystem.getClip();
             event = event -> {
                 if (event.getType() == LineEvent.Type.STOP)
@@ -48,7 +48,7 @@ public class Sound {
      */
     public void playInLoop() {
         try {
-            ais = AudioSystem.getAudioInputStream(file);
+            ais = AudioSystem.getAudioInputStream(FILE);
             clip = AudioSystem.getClip();
             clip.open(ais);
             clip.loop(Clip.LOOP_CONTINUOUSLY);

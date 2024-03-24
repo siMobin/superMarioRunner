@@ -5,6 +5,9 @@ import java.awt.*;
 /**
  * It is only for cosmetic
  * and code clarification purpose
+ * 
+ * The constructor initializes the x, y, width, and height properties of the
+ * Coordinates object.
  */
 public class Coordinates extends Rectangle {
     public Coordinates(int x, int y, int width, int height) {

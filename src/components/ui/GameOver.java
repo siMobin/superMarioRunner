@@ -6,15 +6,10 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 public class GameOver implements Drawable {
-    private static final BufferedImage text = new Resource().getResourceImage("/Game-over.png");
-    private static final BufferedImage restartButton = new Resource().getResourceImage("/Restart.png");
+    private static final BufferedImage TEXT = new Resource().getResourceImage("/Game-over.png");
+    private static final BufferedImage RESTART_BUTTON = new Resource().getResourceImage("/Restart.png");
 
     public GameOver() {
-        //
-    }
-
-    @Override
-    public void update() {
         //
     }
 
@@ -25,9 +20,21 @@ public class GameOver implements Drawable {
      */
     @Override
     public void draw(Graphics g) {
-        g.drawImage(text, (WINDOW_WIDTH - text.getWidth()) / 2, (WINDOW_HEIGHT - text.getHeight()) / 2 - 70, null);
-        g.drawImage(restartButton, (WINDOW_WIDTH - restartButton.getWidth()) / 2,
-                (WINDOW_HEIGHT - restartButton.getHeight()) / 2 - 30, null);
+        g.drawImage(TEXT, (WINDOW_WIDTH - TEXT.getWidth()) / 2, (WINDOW_HEIGHT - TEXT.getHeight()) / 2 - 70, null);
+        g.drawImage(RESTART_BUTTON, (WINDOW_WIDTH - RESTART_BUTTON.getWidth()) / 2,
+                (WINDOW_HEIGHT - RESTART_BUTTON.getHeight()) / 2 - 30, null);
+    }
+
+    /**
+     * The following methods are unimplemented/non-required.
+     * 
+     * @see components.Drawable#update()
+     * 
+     * @see components.Drawable#reset()
+     */
+    @Override
+    public void update() {
+        //
     }
 
     @Override

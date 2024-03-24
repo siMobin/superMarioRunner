@@ -20,9 +20,9 @@ public class Obstacles implements Drawable {
         ObstacleImage enemy_1 = new ObstacleImage(new Resource().getResourceImage("/obstacles/Cactus-1-c.png"));
         ObstacleImage enemy_2 = new ObstacleImage(new Resource().getResourceImage("/obstacles/Cactus-2-c.png"));
         ObstacleImage enemy_3 = new ObstacleImage(new Resource().getResourceImage("/obstacles/shit.png"));
+        ObstacleImage enemy_4 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-2.png"));
         ObstacleImage enemy_5 = new ObstacleImage(new Resource().getResourceImage("/obstacles/tree-root-1.png"));
         ObstacleImage enemy_6 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-1.png"));
-        ObstacleImage enemy_4 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-2.png"));
 
         OBSTACLE_IMAGES.add(enemy_1);
         OBSTACLE_IMAGES.add(enemy_2);
@@ -162,14 +162,6 @@ public class Obstacles implements Drawable {
                         obstacle.coordinates.height);
             }
             g.drawImage(obstacle.getOBSTACLE_IMAGE(), obstacle.getX(), obstacle.getY(), null);
-
-            // Check for collision with Mario
-            // for (Coordinates marioCoordinates : Mario.constructedCoordinates) {
-            // if (marioCoordinates.intersects(obstacle.coordinates)) {
-            // // Handle collision here, for example:
-            // // gameOver(); // Call a method to end the game
-            // }
-            // }
 
             // If the obstacle is out of the screen, remove it and add a new one
             if (obstacle.getX() < -obstacle.getOBSTACLE_IMAGE().getWidth()) {
