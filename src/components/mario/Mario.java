@@ -23,7 +23,7 @@ public class Mario implements Drawable {
     private static BufferedImage jumpImage = jump;
     private static BufferedImage fallImage = jump;
     private static Animation runAnimation = new Animation(mario_running_animation_delta_time);
-    private static BufferedImage dieImage = new Resource().getResourceImage("/mario/Mario-dead.png");
+    private static BufferedImage dieImage = new Resource().getResourceImage("/mario/dead.png");
 
     /**
      * Collision adjustments.
@@ -57,8 +57,8 @@ public class Mario implements Drawable {
      */
     public boolean jumpRequested;
 
-    private static Sound jumpSound = new Sound("/mario/jump.wav");
-    public Sound gameOverSound = new Sound("/mario/dead.wav");
+    private static Sound jumpSound = new Sound("/jump.wav");
+    public Sound gameOverSound = new Sound("/dead.wav");
 
     /**
      * Constructor for the Mario class.

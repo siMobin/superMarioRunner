@@ -14,7 +14,7 @@ public class Score implements Drawable {
     private static final int SCORE_DELTA_TIME = 100 / gameSpeed * 5;
 
     private static final DeltaTime DELTA_TIME = new DeltaTime(SCORE_DELTA_TIME);
-    private static final Sound SCORE_SOUND = new Sound("/score-reached.wav");
+    private static final Sound SCORE_SOUND = new Sound("/flag.wav");
 
     private static boolean isPlayed = false;
 

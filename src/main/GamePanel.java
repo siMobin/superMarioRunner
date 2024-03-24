@@ -51,8 +51,11 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
     }
 
     /**
-     * Start the game by setting running to true and hiding the intro user
-     * interface.
+     * Starts the game by setting the running flag to true, stopping the intro
+     * music, and hiding the intro UI.
+     *
+     * @param None
+     * @return None
      */
     public void startGame() {
         System.out.println("\nGame log");
@@ -60,21 +63,22 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
 
         running = true;
         intro = false;
+        introUI.overworld.stop(); // stop the intro music
         if (running == true) {
             System.out.println("Running...");
         }
     }
 
     /**
-     * Resets the game by resetting all the game variables and starting a new game.
+     * Resets the game state and starts a new game.
      *
-     * This function sets the gameOver and running flags to false and true
-     * respectively.
-     * It also resets the gameSpeed to the initial value.
-     * The scoreUI, mario, obstacles, ground, and background are reset.
-     * If Mario is the player, the introUI.overworld sound is played in loop.
-     * The mario.gameOverSound is stopped if it is open.
-     * A new mainThread is created and started.
+     * This function sets the gameOver flag to false, the running flag to true,
+     * and resets the game speed to the initial value. It also resets the score,
+     * mario, obstacles, ground, and background objects. Finally, it starts a new
+     * thread to run the game loop.
+     *
+     * @param None
+     * @return None
      */
     public void resetGame() {
         gameOver = false;
@@ -83,32 +87,34 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         gameSpeed = game_start_speed;
 
         scoreUI.reset();
-
         mario.reset();
         obstacles.reset();
         ground.reset();
         background.reset();
-
-        if (Mario.isMario) {
-            introUI.overworld.playInLoop();
-
-            // It prevents from layering sounds
-            if (mario.gameOverSound.isOpen())
-                mario.gameOverSound.stop();
-        }
-
         mainThread = new Thread(this);
         mainThread.start();
     }
 
+    /**
+     * Pauses the game by setting the `paused` flag to true and playing the
+     * `playInLoop` method of the `introUI.overworld` object.
+     * Prints "Paused" to the console.
+     */
     public void pauseGame() {
         paused = true;
+        introUI.overworld.playInLoop();
         System.out.println("Paused");
     }
 
+    /**
+     * Resumes the game by setting the 'paused' flag to false, stopping the
+     * 'introUI.overworld' and notifying the 'pauseLock' to wake up any waiting
+     * threads. Also prints "Resumed" to the console.
+     */
     public void resumeGame() {
         synchronized (pauseLock) {
             paused = false;
+            introUI.overworld.stop();
             pauseLock.notify();
             System.out.println("Resumed");
         }

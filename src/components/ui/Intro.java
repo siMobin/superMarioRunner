@@ -6,7 +6,6 @@ import interfaces.Drawable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.image.BufferedImage;
 
 public class Intro implements Drawable {
@@ -14,13 +13,14 @@ public class Intro implements Drawable {
 
     public JLabel introLabel = new JLabel();
 
-    public final Sound overworld = new Sound("/mario/overworld.wav");
+    public final Sound overworld = new Sound("/overworld.wav");
 
     public Intro() {
-        introLabel.setBounds((WINDOW_WIDTH - image.getWidth()) / 2, (WINDOW_HEIGHT - image.getHeight()) / 2 - 50,
+        introLabel.setBounds((WINDOW_WIDTH - image.getWidth()) / 2,
+                (WINDOW_HEIGHT - image.getHeight()) / 2 - 50,
                 image.getWidth(), image.getHeight());
-        introLabel.addMouseListener(new MouseAdapter() {
-        });
+
+        overworld.playInLoop(); // play the intro music
     }
 
     /**
