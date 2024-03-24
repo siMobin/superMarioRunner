@@ -40,7 +40,7 @@ public class Obstacles implements Drawable {
     private void initFirstObstacles() {
         incomingObstacles = new ArrayList<>();
 
-        for (int i = 0; i < MAX_INCOMING_OBSTACLES; i++) {
+        for (int i = 0; i < max_incoming_obstacles; i++) {
             ObstacleImage rand = getRandomObstacle();
 
             incomingObstacles.add(rand);

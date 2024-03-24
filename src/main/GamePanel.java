@@ -16,12 +16,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener, GameSettings {
-    private static final int GAME_FPS = 60;
+    private static final int game_fps = 60;
 
     private Thread mainThread = new Thread(this);
 
     public static boolean debugMode = false;
-    public static int gameSpeed = GAME_START_SPEED;
+    public static int gameSpeed = game_start_speed;
     public static boolean isGameSpeedChanged = false;
 
     public boolean running = false;
@@ -60,6 +60,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
 
         running = true;
         intro = false;
+        if (running == true) {
+            System.out.println("Running...");
+        }
     }
 
     /**
@@ -77,7 +80,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         gameOver = false;
         running = true;
 
-        gameSpeed = GAME_START_SPEED;
+        gameSpeed = game_start_speed;
 
         scoreUI.reset();
 
@@ -121,7 +124,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
      * @return void
      */
     private void changeGameSpeed() {
-        if (Score.score > 0 && Score.score % 260 == 0 && !isGameSpeedChanged && gameSpeed < GAME_MAX_SPEED) {
+        if (Score.score > 0 && Score.score % 260 == 0 && !isGameSpeedChanged && gameSpeed < game_max_speed) {
             isGameSpeedChanged = true;
             gameSpeed += 1;
         }
@@ -168,7 +171,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         // INTRO LOOP FOR EASTER EGG
         while (intro) {
             try {
-                int msPerFrame = 1000 / GAME_FPS;
+                int msPerFrame = 1000 / game_fps;
                 Thread.sleep(msPerFrame);
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -181,7 +184,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
 
             // GAME TIMING
             try {
-                int msPerFrame = 1000 / GAME_FPS;
+                int msPerFrame = 1000 / game_fps;
                 Thread.sleep(msPerFrame);
 
                 if (paused) {

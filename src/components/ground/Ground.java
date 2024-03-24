@@ -62,7 +62,7 @@ public class Ground implements Drawable {
                 g.setColor(ground.debugColor);
                 g.drawLine(ground.x, GROUND_Y, ground.image.getWidth() + ground.x, GROUND_Y);
             }
-            g.drawImage(ground.image, ground.x, GROUND_Y + GROUND_Y_IMAGE_OFFSET, null);
+            g.drawImage(ground.image, ground.x, GROUND_Y + ground_y_image_offset, null);
         }
     }
 

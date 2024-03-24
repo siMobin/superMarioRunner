@@ -8,7 +8,7 @@ import interfaces.GameSettings;
 
 public class GameWindow implements GameSettings {
     // Timing...
-    private static final long FRAME_TIME = (long) (1000.0 / GAME_FPS);
+    private static final long FRAME_TIME = (long) (1000.0 / game_fps);
 
     public GameWindow() {
         JFrame mainGameWindow = new JFrame(WINDOW_TITLE);

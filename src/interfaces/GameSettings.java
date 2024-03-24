@@ -1,5 +1,7 @@
 package interfaces;
 
+import java.awt.Color;
+
 /**
  * This interface defines the game settings.
  * 
@@ -29,14 +31,16 @@ package interfaces;
  * will have their namespaces polluted by the constants in the interface.
  * ------------------------------------------------------------------------------------------------------
  *
- * @version 1.0.0
  * @since 71dadc8
  * @date 2023-03-20
+ * 
+ * @version 1.1.0
+ * @date 2023-03-23
  * @author [siMobin](https://github.com/siMobin)
  */
 
 public interface GameSettings {
-    boolean DEBUG_MODE = true;
+    boolean debug_mode = true;
 
     /**
      * General options
@@ -55,16 +59,19 @@ public interface GameSettings {
      * Contain all the necessary physics for the game
      * https://stackoverflow.com/questions/18283199/java-main-game-loop
      */
-    int GAME_FPS = 360;
-    float GAME_GRAVITY = 0.64f;
-    int GAME_SPEED = 6;
-    static int GAME_START_SPEED = 5;
-    static int GAME_MAX_SPEED = 12;
-    // public static int gameSpeed = GAME_START_SPEED;
+    int game_fps = 360;
+    float game_gravity = 0.64f;
+    int game_speed = 6;
+    static int game_start_speed = 5;
+    static int game_max_speed = 12;
+    // public static int gameSpeed = game_start_speed;
     //
     final int GROUND_Y = 220;
-    int GROUND_Y_IMAGE_OFFSET = -9;
-    // int GROUND_SPEED = GAME_SPEED;
+    int ground_y_image_offset = -9;
+    // int GROUND_SPEED = game_speed;
+    static final int CLOUD_LEVEL = 8;
+    static int cloud_density = 3;
+    final Color DEFAULT_COLOR = new Color(150, 220, 250, 85);
 
     /**
      * Obstacles options
@@ -72,22 +79,22 @@ public interface GameSettings {
     final int OBSTACLES_MIN_SPACE_BETWEEN = 250;
     final int OBSTACLES_MAX_SPACE_BETWEEN = 500;
     final int OBSTACLES_FIRST_OBSTACLE_X = 600;
-    static int MAX_INCOMING_OBSTACLES = 10;
-    // int OBSTACLES_SPEED = GAME_SPEED;
+    static int max_incoming_obstacles = 10;
+    // int OBSTACLES_SPEED = game_speed;
 
     /**
      * Mario's attributes.
      */
-    static final float MARIO_FRAME = 11;
+    static final int MARIO_FRAME = 11;
     static final int MARIO_JUMP_STRENGTH = 13;
     static final int MARIO_FALL_STRENGTH = 8;
     static final float MARIO_START_X = 50;
-    static int MARIO_RUNNING_ANIMATION_DELTA_TIME = 30;
+    static int mario_running_animation_delta_time = 30;
 
     /**
      * Score settings.
      */
     static final String SCORE_FILE_NAME = "HighScore";
-    int SCORE_MAX_ZEROS = 5;
-    int SCORE_MAX_HIGH_SCORE = 99999;
+    final int SCORE_MAX_ZEROS = 5;
+    final int SCORE_MAX_HIGH_SCORE = 99999;
 }

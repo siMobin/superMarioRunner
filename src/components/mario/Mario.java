@@ -22,7 +22,7 @@ public class Mario implements Drawable {
     private static BufferedImage idleImage = jump;
     private static BufferedImage jumpImage = jump;
     private static BufferedImage fallImage = jump;
-    private static Animation runAnimation = new Animation(MARIO_RUNNING_ANIMATION_DELTA_TIME);
+    private static Animation runAnimation = new Animation(mario_running_animation_delta_time);
     private static BufferedImage dieImage = new Resource().getResourceImage("/mario/Mario-dead.png");
 
     /**
@@ -73,6 +73,7 @@ public class Mario implements Drawable {
         for (int i = 0; i <= MARIO_FRAME; i++) {
             runAnimation.addFrame(ResizeImage.getResizedImage("/marioFrame/frame_" + i + ".png", 50));
         }
+        System.out.println("MArio frame size: " + MARIO_FRAME);
         // Add more @Animation addFrame
 
         // Initialize collision coordinates
@@ -195,7 +196,7 @@ public class Mario implements Drawable {
                 jumpRequested = false;
             }
         } else if (isInAir()) {
-            speedY += GAME_GRAVITY;
+            speedY += game_gravity;
             y += speedY;
             TEMP_y = y;
 

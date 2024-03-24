@@ -1,6 +1,5 @@
 package components.background;
 
-// import components.ui.Score;
 import components.utility.ComponentImage;
 import components.utility.Resource;
 import interfaces.Drawable;
@@ -8,100 +7,78 @@ import interfaces.Drawable;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Random;
 
 import static main.GamePanel.*;
 
 public class Background implements Drawable {
-    private static final BufferedImage CLOUD_IMAGE = new Resource().getResourceImage("/Cloud.png");
-    private static final BufferedImage CLOUD_IMAGE_2 = new Resource().getResourceImage("/Cloud-2.png");
-
+    private static final BufferedImage[] CLOUD_IMAGES;
     private final int backgroundSpeed = gameSpeed / 5;
-
     private BackgroundColors backgroundColor;
-
     private static ArrayList<ComponentImage> cloudImages;
-    private static final ComponentImage firstCloud = new ComponentImage(CLOUD_IMAGE, WINDOW_WIDTH - 700, 40,
-            Color.LIGHT_GRAY);
-    private static final ComponentImage secondCloud = new ComponentImage(CLOUD_IMAGE_2, WINDOW_WIDTH - 400, 20,
-            Color.LIGHT_GRAY);
-    private static final ComponentImage thirdCloud = new ComponentImage(CLOUD_IMAGE, WINDOW_WIDTH - 200, 80,
-            Color.LIGHT_GRAY);
+
+    static {
+        CLOUD_IMAGES = new BufferedImage[CLOUD_LEVEL + 1]; // +1 for a safe memory allocation...
+        for (int i = 0; i <= CLOUD_LEVEL; i++) {
+            CLOUD_IMAGES[i] = new Resource().getResourceImage("/cloud/cloud_" + i + ".png");
+        }
+        System.out.println("Cloud level: " + CLOUD_LEVEL);
+    }
 
     public Background() {
         backgroundColor = BackgroundColors.DEFAULT;
-
         backgroundInit();
     }
 
     /**
-     * Set the background color.
+     * Initializes the background by generating a specified number of cloud images
+     * at random positions within the window.
      *
-     * @param backgroundColor the background color to set
-     */
-    public void setBackgroundColor(BackgroundColors backgroundColor) {
-        this.backgroundColor = backgroundColor;
-    }
-
-    /**
-     * Initializes the background by adding cloud images to the cloudImages list.
-     *
-     * @return void
+     * @param None
+     * @return None
      */
     private void backgroundInit() {
         cloudImages = new ArrayList<>();
-        cloudImages.add(firstCloud);
-        cloudImages.add(secondCloud);
-        cloudImages.add(thirdCloud);
+        Random random = new Random();
+
+        System.out.print("Cloud density: ");
+        for (int i = 0; i <= cloud_density; i++) {
+            int z = (int) (Math.random() * WINDOW_HEIGHT);
+            System.out.print(z + " ");
+            int y = random.nextInt(WINDOW_HEIGHT - z); // Random y within the window height
+            int x = random.nextInt(WINDOW_WIDTH); // Random x within the window width
+            BufferedImage cloudImage = CLOUD_IMAGES[random.nextInt(CLOUD_IMAGES.length)]; // Random cloud image
+            ComponentImage cloud = new ComponentImage(cloudImage, x, y, Color.WHITE);
+            cloudImages.add(cloud);
+        }
+        System.out.println();
     }
 
     /**
-     * Change the background color based on the score.
-     *
-     */
-    // private void changeBackgroundColor() {
-    // if (Score.score > 0 && Score.score % 600 == 0 && backgroundColor !=
-    // BackgroundColors.DARK) {
-    // setBackgroundColor(BackgroundColors.DARK);
-    // } else if (Score.score > 0 && Score.score % 800 == 0) {
-    // setBackgroundColor(BackgroundColors.DEFAULT);
-    // }
-    // }
-
-    /**
-     * Update the position of the clouds and change the background color.
-     *
+     * Updates the cloud images by moving them horizontally and resetting their
+     * position if they move off the screen.
      */
     @Override
     public void update() {
-        firstCloud.x -= backgroundSpeed;
-        secondCloud.x -= backgroundSpeed;
-        thirdCloud.x -= backgroundSpeed;
-
-        if (firstCloud.x <= -firstCloud.image.getWidth()) {
-            firstCloud.x = WINDOW_WIDTH;
+        for (ComponentImage cloud : cloudImages) {
+            cloud.x -= backgroundSpeed;
+            if (cloud.x <= -cloud.image.getWidth()) {
+                cloud.x = WINDOW_WIDTH;
+            }
         }
-
-        if (secondCloud.x <= -secondCloud.image.getWidth()) {
-            secondCloud.x = WINDOW_WIDTH;
-        }
-
-        if (thirdCloud.x <= -thirdCloud.image.getWidth()) {
-            thirdCloud.x = WINDOW_WIDTH;
-        }
-
-        // changeBackgroundColor();
     }
 
     /**
-     * Draws the graphics with the specified background color and cloud images.
+     * Draws the background based on the specified background color.
      *
-     * @param g Graphics object to be drawn
-     * @return void
+     * @param g the Graphics object used for drawing
      */
     @Override
     public void draw(Graphics g) {
+
         switch (backgroundColor) {
             case DEFAULT:
+                defaultColor(g);
                 break;
             case DARK:
                 g.setColor(Color.BLACK);
@@ -119,14 +96,23 @@ public class Background implements Drawable {
     }
 
     /**
-     * Reset the object to its initial state.
+     * Set the default color and fill the entire window with it.
      *
-     * @param none
-     * @return void
+     * @param g The graphics object to set the color and fill the window
+     */
+    public void defaultColor(Graphics g) {
+        g.setColor(DEFAULT_COLOR);
+        g.fillRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    }
+
+    /**
+     * Reset the object by initializing the background and setting the background
+     * color to default.
      */
     @Override
     public void reset() {
         backgroundInit();
         backgroundColor = BackgroundColors.DEFAULT;
     }
+
 }

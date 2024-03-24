@@ -41,6 +41,12 @@ public class Score implements Drawable {
         return ret.toString();
     }
 
+    /**
+     * Plays a sound if the score is a multiple of 100 and the sound has not been
+     * played yet.
+     *
+     * @return void
+     */
     private void playSound() {
         if (score > 0 && score % 100 == 0 && !isPlayed) {
             isPlayed = true;
@@ -48,6 +54,12 @@ public class Score implements Drawable {
         }
     }
 
+    /**
+     * Checks if the current score is higher than the high score.
+     *
+     * @return true if the current score is higher than the high score, false
+     *         otherwise
+     */
     private boolean isHighScore() {
         return highScore < score;
     }
@@ -93,6 +105,7 @@ public class Score implements Drawable {
             }
         }
         System.out.println("Score system: High score read");
+        System.out.println("High score: " + highScore);
         return (int) highScore;
     }
 
@@ -121,7 +134,7 @@ public class Score implements Drawable {
                 e.printStackTrace();
             }
             highScore = score;
-            System.out.println("Score system: New high score");
+            System.out.println("Score system: New high score (" + highScore + ")");
         }
     }
 
@@ -150,10 +163,10 @@ public class Score implements Drawable {
      */
     @Override
     public void draw(Graphics g) {
-        g.setColor(Color.GRAY);
+        g.setColor(Color.BLACK);
         g.setFont(new Font("Consolas", Font.BOLD, 18));
         g.drawString(printScore(score), WINDOW_WIDTH - 100, 40);
-        g.setColor(Color.LIGHT_GRAY);
+        g.setColor(Color.GRAY);
         g.drawString("HI " + printScore(highScore), WINDOW_WIDTH - 200, 40);
     }
 
