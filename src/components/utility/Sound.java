@@ -1,9 +1,12 @@
 package components.utility;
 
 import javax.sound.sampled.*;
+
+import interfaces.SoundManager;
+
 import java.io.File;
 
-public class Sound {
+public class Sound implements SoundManager {
     private final File FILE;
 
     private Clip clip;
@@ -85,5 +88,10 @@ public class Sound {
      */
     public boolean isNull() {
         return clip == null;
+    }
+
+    @Override
+    public void toggleMic() {
+        throw new UnsupportedOperationException("Unimplemented method 'toggleMic'");
     }
 }

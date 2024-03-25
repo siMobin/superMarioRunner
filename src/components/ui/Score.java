@@ -3,6 +3,7 @@ package components.ui;
 import components.utility.Sound;
 import components.utility.DeltaTime;
 import interfaces.Drawable;
+import interfaces.SoundManager;
 import main.GamePanel;
 
 import java.awt.*;
@@ -10,18 +11,20 @@ import java.io.*;
 
 import static main.GamePanel.gameSpeed;
 
-public class Score implements Drawable {
+public class Score implements Drawable, SoundManager {
     private static final int SCORE_DELTA_TIME = 100 / gameSpeed * 5;
 
     private static final DeltaTime DELTA_TIME = new DeltaTime(SCORE_DELTA_TIME);
     private static final Sound SCORE_SOUND = new Sound("/flag.wav");
 
     private static boolean isPlayed = false;
+    private static boolean isMuted = false;
 
     private static int highScore = readHighScore();
     public static int score = 0;
 
     public Score() {
+        //
     }
 
     /**
@@ -42,13 +45,21 @@ public class Score implements Drawable {
     }
 
     /**
+     * Toggles the mute state of the audio, stopping or playing the sound
+     * accordingly.
+     */
+    public void toggleMic() {
+        isMuted = !isMuted;
+    }
+
+    /**
      * Plays a sound if the score is a multiple of 100 and the sound has not been
      * played yet.
      *
      * @return void
      */
     private void playSound() {
-        if (score > 0 && score % 100 == 0 && !isPlayed) {
+        if (score > 0 && score % 100 == 0 && !isPlayed && !isMuted) {
             isPlayed = true;
             SCORE_SOUND.play();
         }

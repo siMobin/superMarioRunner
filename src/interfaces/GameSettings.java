@@ -34,8 +34,8 @@ import java.awt.Color;
  * @since 71dadc8
  * @date 2023-03-20
  * 
- * @version 1.1.0
- * @date 2023-03-23
+ * @version 1.1.1
+ * @date 2023-03-25
  * @author [siMobin](https://github.com/siMobin)
  */
 
@@ -47,7 +47,7 @@ public interface GameSettings {
      * Game Window & Others
      * https://docs.oracle.com/javase/tutorial/uiswing/lookandfeel/index.html
      */
-    static final String WINDOW_TITLE = "Supper Mario";
+    static final String WINDOW_TITLE = "Super Mario Runner";
     static final boolean WINDOW_RESIZABLE = false;
     static final boolean WINDOW_ALWAYS_ON_TOP = false;
     public static final int WINDOW_WIDTH = 800;

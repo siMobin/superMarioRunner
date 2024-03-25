@@ -2,6 +2,7 @@ package components.mario;
 
 import components.utility.*;
 import interfaces.Drawable;
+import interfaces.SoundManager;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -9,12 +10,13 @@ import java.util.ArrayList;
 
 import static main.GamePanel.debugMode;
 
-public class Mario implements Drawable {
+public class Mario implements Drawable, SoundManager {
     private static final int MARIO_BORDER_SIZE = 1;
     private static final float X = MARIO_START_X;
 
     public static boolean isMario = false;
     public static boolean marioLoaded = false;
+    private boolean isMuted = false;
 
     private static MarioStates marioState = MarioStates.IDLE;
     private final static BufferedImage JUMP = ResizeImage.getResizedImage("/mario/jump.png", 50);
@@ -140,7 +142,26 @@ public class Mario implements Drawable {
     }
 
     /**
-     * Method to make the character jump in the game.
+     * Toggles the mute state of the object and plays or stops the jump sound
+     * accordingly.
+     */
+    public void toggleMic() {
+        isMuted = !isMuted;
+    }
+
+    /**
+     * This function is responsible for making Mario jump in the game.
+     * 
+     * It checks the current state of Mario and transitions him to the jumping state
+     * if he is running. It also updates the vertical speed and position of Mario
+     * to simulate the jump. Additionally, it stops any ongoing jump sound and plays
+     * the jump sound if it is not muted.
+     * 
+     * If Mario is not running and is already in the air, it sets the jump requested
+     * flag to true.
+     *
+     * @param None
+     * @return None
      */
     public void jump() {
         if (marioState == MarioStates.RUNNING) {
@@ -150,11 +171,13 @@ public class Mario implements Drawable {
             y += speedY;
 
             // It prevents from layering sounds and game freeze
-            if (!jumpSound.isNull()) {
+            if (!jumpSound.isNull() && !isMuted) {
                 if (jumpSound.isOpen())
                     jumpSound.stop();
             }
-            jumpSound.play();
+            if (!isMuted) {
+                jumpSound.play();
+            }
         } else if (isInAir()) {
             jumpRequested = true;
         }
@@ -175,7 +198,9 @@ public class Mario implements Drawable {
      */
     public void die() {
         marioState = MarioStates.DIE;
-        gameOverSound.play();
+        if (marioState == MarioStates.DIE && !isMuted && gameOverSound != null) {
+            gameOverSound.play();
+        }
     }
 
     /**

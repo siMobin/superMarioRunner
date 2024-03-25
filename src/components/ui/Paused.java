@@ -34,9 +34,11 @@ public class Paused implements Drawable {
      */
     @Override
     public void update() {
+        //
     }
 
     @Override
     public void reset() {
+        //
     }
 }

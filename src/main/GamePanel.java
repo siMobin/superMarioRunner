@@ -8,14 +8,16 @@ import components.ui.GameOver;
 import components.ui.Intro;
 import components.ui.Paused;
 import components.ui.Score;
+import components.ui.isMute;
 import interfaces.GameSettings;
+import interfaces.SoundManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class GamePanel extends JPanel implements Runnable, KeyListener, GameSettings {
+public class GamePanel extends JPanel implements Runnable, KeyListener, GameSettings, SoundManager {
     private int game_fps = 60;
 
     private Thread mainThread = new Thread(this);
@@ -28,12 +30,15 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
     public boolean paused = false;
     public boolean gameOver = false;
     public boolean intro = true;
+    private boolean isMuted = false;
+    isMute mute = new isMute();
     final Object PAUSE_LOCK = new Object();
 
     Mario mario = new Mario();
     Ground ground = new Ground();
     Obstacles obstacles = new Obstacles();
     Background background = new Background();
+    Score score = new Score();
 
     Score scoreUI = new Score();
     GameOver gameOverUI = new GameOver();
@@ -48,6 +53,31 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         add(introUI.introLabel);
 
         mainThread.start();
+    }
+
+    /**
+     * Toggles the Audio on and off.
+     *
+     * This function checks the current state of the microphone and toggles it to
+     * the opposite state.
+     * If the microphone is currently off, it will be turned on and the intro music
+     * will start playing.
+     * If the microphone is currently on, it will be turned off and the intro music
+     * will stop playing.
+     * The function also prints a message to the console indicating whether the
+     * microphone is on or off.
+     */
+    public void toggleMic() {
+        isMuted = !isMuted;
+        if (isMuted) {
+            introUI.overworld.stop();
+            System.out.println("Audio: Mic Off");
+        } else {
+            if (!running || paused) {
+                introUI.overworld.playInLoop();
+            }
+            System.out.println("Audio: Mic On");
+        }
     }
 
     /**
@@ -102,7 +132,9 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
      */
     public void pauseGame() {
         paused = true;
-        introUI.overworld.playInLoop();
+        if (!isMuted) {
+            introUI.overworld.playInLoop();
+        }
         System.out.println("Paused");
     }
 
@@ -150,6 +182,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         super.paintComponent(g);
 
         background.draw(g);
+
+        if (isMuted) {
+            mute.draw(g);
+        }
 
         if (paused)
             pausedUI.draw(g);
@@ -245,6 +281,13 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
             debugMode = !debugMode;
         }
 
+        // Mic
+        if (e.getKeyChar() == 'm' || e.getKeyChar() == 'M') {
+            toggleMic();
+            mario.toggleMic();
+            score.toggleMic();
+        }
+
         // JUMP
         if (e.getKeyChar() == ' ' || e.getKeyChar() == 'w' || e.getKeyChar() == 'W'
                 || e.getKeyCode() == KeyEvent.VK_UP) {
@@ -258,8 +301,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
                 startGame();
                 mario.run();
                 mario.jump();
+                introUI.overworld.stop();
             } else if (gameOver) {
                 resetGame();
+                introUI.overworld.stop();
             }
         }
 
