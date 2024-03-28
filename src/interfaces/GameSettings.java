@@ -34,8 +34,8 @@ import java.awt.Color;
  * @since 71dadc8
  * @date 2023-03-20
  * 
- * @version 1.1.1
- * @date 2023-03-25
+ * @version 1.1.2
+ * @date 2023-03-28
  * @author [siMobin](https://github.com/siMobin)
  */
 
@@ -69,7 +69,7 @@ public interface GameSettings {
     final int GROUND_Y = 220;
     int ground_y_image_offset = -9;
     // int GROUND_SPEED = game_speed;
-    static final int CLOUD_LEVEL = 8;
+    static final int CLOUD_LEVEL = 14;
     static int cloud_density = 3;
     final Color DEFAULT_COLOR = new Color(150, 220, 250, 85);
 

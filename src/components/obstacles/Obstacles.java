@@ -20,9 +20,19 @@ public class Obstacles implements Drawable {
         ObstacleImage enemy_1 = new ObstacleImage(new Resource().getResourceImage("/obstacles/Cactus-1-c.png"));
         ObstacleImage enemy_2 = new ObstacleImage(new Resource().getResourceImage("/obstacles/Cactus-2-c.png"));
         ObstacleImage enemy_3 = new ObstacleImage(new Resource().getResourceImage("/obstacles/shit.png"));
-        ObstacleImage enemy_4 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-2.png"));
-        ObstacleImage enemy_5 = new ObstacleImage(new Resource().getResourceImage("/obstacles/tree-root-1.png"));
-        ObstacleImage enemy_6 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-1.png"));
+        ObstacleImage enemy_4 = new ObstacleImage(new Resource().getResourceImage("/obstacles/tree-root-1.png"));
+        //
+        ObstacleImage enemy_5 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-1.png"));
+        ObstacleImage enemy_6 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-2.png"));
+        ObstacleImage enemy_7 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-3.png"));
+        ObstacleImage enemy_8 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-4.png"));
+        ObstacleImage enemy_9 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-5.png"));
+        ObstacleImage enemy_10 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-6.png"));
+        ObstacleImage enemy_11 = new ObstacleImage(new Resource().getResourceImage("/obstacles/mushroom-7.png"));
+        //
+        ObstacleImage enemy_12 = new ObstacleImage(new Resource().getResourceImage("/obstacles/stone-0.png"));
+        ObstacleImage enemy_13 = new ObstacleImage(new Resource().getResourceImage("/obstacles/stone-1.png"));
+        ObstacleImage enemy_14 = new ObstacleImage(new Resource().getResourceImage("/obstacles/stone-2.png"));
 
         OBSTACLE_IMAGES.add(enemy_1);
         OBSTACLE_IMAGES.add(enemy_2);
@@ -30,6 +40,14 @@ public class Obstacles implements Drawable {
         OBSTACLE_IMAGES.add(enemy_4);
         OBSTACLE_IMAGES.add(enemy_5);
         OBSTACLE_IMAGES.add(enemy_6);
+        OBSTACLE_IMAGES.add(enemy_7);
+        OBSTACLE_IMAGES.add(enemy_8);
+        OBSTACLE_IMAGES.add(enemy_9);
+        OBSTACLE_IMAGES.add(enemy_10);
+        OBSTACLE_IMAGES.add(enemy_11);
+        OBSTACLE_IMAGES.add(enemy_12);
+        OBSTACLE_IMAGES.add(enemy_13);
+        OBSTACLE_IMAGES.add(enemy_14);
 
         initFirstObstacles();
     }

@@ -7,7 +7,8 @@ public class App {
         System.out.println("|-----------------------------------------------|");
         System.out.println("|       Press space, w or up key to jump        |");
         System.out.println("|       Press s or down key to quick fall       |");
-        System.out.println("|       Press p or esc key to pause             |");
+        System.out.println("|       Press m to mute the audio               |");
+        System.out.println("|       Press p or esc to pause                 |");
         System.out.println("|       Press ` key to enter debug mode         |");
         System.out.println("|-----------------------------------------------|");
         System.out.println("\n\n");
