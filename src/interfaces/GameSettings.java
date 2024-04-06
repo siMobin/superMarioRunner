@@ -34,13 +34,13 @@ import java.awt.Color;
  * @since 71dadc8
  * @date 2023-03-20
  * 
- * @version 1.1.2
- * @date 2023-03-28
+ * @version 2.1.2
+ * @date 2023-03-30
  * @author [siMobin](https://github.com/siMobin)
  */
 
 public interface GameSettings {
-    boolean debug_mode = true;
+    final public static boolean DEBUGGER = true;
 
     /**
      * General options
@@ -59,7 +59,7 @@ public interface GameSettings {
      * Contain all the necessary physics for the game
      * https://stackoverflow.com/questions/18283199/java-main-game-loop
      */
-    int game_fps = 360;
+    int game_fps = 120;
     float game_gravity = 0.64f;
     int game_speed = 6;
     static int game_start_speed = 5;

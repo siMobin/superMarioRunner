@@ -277,9 +277,10 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
     @Override
     public void keyPressed(KeyEvent e) {
         // DEBUG
-        if (e.getKeyChar() == '`') {
-            debugMode = !debugMode;
-        }
+        if (DEBUGGER)
+            if (e.getKeyChar() == '`') {
+                debugMode = !debugMode;
+            }
 
         // Mic
         if (e.getKeyChar() == 'm' || e.getKeyChar() == 'M') {
