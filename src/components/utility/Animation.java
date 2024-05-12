@@ -16,6 +16,12 @@ public class Animation {
     private ArrayList<BufferedImage> frames;
     private int index;
 
+    /**
+     * Constructs an Animation object with a given frame delay in milliseconds.
+     * The delay is the amount of time between each frame in the animation.
+     *
+     * @param deltaTime the frame delay in milliseconds
+     */
     public Animation(int deltaTime) {
         frames = new ArrayList<>();
         index = 0;

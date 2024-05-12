@@ -11,23 +11,24 @@ public class GameWindow implements GameSettings {
     private static final long FRAME_TIME = (long) (1000.0 / game_fps);
 
     public GameWindow() {
-        JFrame mainGameWindow = new JFrame(WINDOW_TITLE);
-        mainGameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        JFrame mainGameWindow = new JFrame(WINDOW_TITLE); // Create the main game window
+        mainGameWindow.setSize(WINDOW_WIDTH, WINDOW_HEIGHT); // Set the window size
         mainGameWindow.setResizable(WINDOW_RESIZABLE);
 
-        GamePanel gamePanel = new GamePanel();
+        GamePanel gamePanel = new GamePanel(); // Create the game panel
         mainGameWindow.add(gamePanel);
 
-        mainGameWindow.addKeyListener(gamePanel);
+        mainGameWindow.addKeyListener(gamePanel); // Add the game panel as a key listener
 
-        mainGameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainGameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Set the window to exit on close (ensure the
+                                                                       // program closes when the window is closed)
         // Set the icon image for the JFrame
         ImageIcon icon = new ImageIcon("lib/icon_sm.png"); // app icon
         mainGameWindow.setIconImage(icon.getImage());
         // Set the window to the screen
-        mainGameWindow.setLocationRelativeTo(null);
+        mainGameWindow.setLocationRelativeTo(null); // Set the window to the center of the screen
         mainGameWindow.setVisible(true);
-        mainGameWindow.setAlwaysOnTop(WINDOW_ALWAYS_ON_TOP);
+        mainGameWindow.setAlwaysOnTop(WINDOW_ALWAYS_ON_TOP); // Set the window index (z)
 
         // Start the game loop
         startGameLoop(gamePanel);
