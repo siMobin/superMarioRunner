@@ -1,6 +1,7 @@
 package interfaces;
 
 import java.awt.Color;
+import java.awt.GraphicsEnvironment;
 
 /**
  * This interface defines the game settings.
@@ -34,8 +35,8 @@ import java.awt.Color;
  * @since 71dadc8
  * @date 2024-03-20
  * 
- * @version 2.1.2
- * @date 2024-03-30
+ * @version 3.0.0
+ * @date 2024-05-28
  * @author [siMobin](https://github.com/siMobin)
  */
 
@@ -54,15 +55,19 @@ public interface GameSettings {
     public static final int WINDOW_HEIGHT = 260;
 
     /**
-     * General Physics
-     * Ground options
+     * General Physics,
+     * Ground options.
      * Contain all the necessary physics for the game
      * https://stackoverflow.com/questions/18283199/java-main-game-loop
      */
-    int game_fps = 120;
-    float game_gravity = 0.64f;
+    // int game_fps = 120;
+    // Use the screen refresh rate so game speed behavior is consistent
+    final int game_fps = GraphicsEnvironment.getLocalGraphicsEnvironment()
+            .getScreenDevices()[0].getDisplayMode().getRefreshRate();
+
+    float game_gravity = 0.55f;
     int game_speed = 6;
-    static int game_start_speed = 5;
+    static int game_start_speed = 6;
     static int game_max_speed = 12;
     // public static int gameSpeed = game_start_speed;
     //
@@ -86,10 +91,10 @@ public interface GameSettings {
      * Mario's attributes.
      */
     static final int MARIO_FRAME = 11;
-    static final int MARIO_JUMP_STRENGTH = 13;
-    static final int MARIO_FALL_STRENGTH = 8;
+    static final int MARIO_JUMP_STRENGTH = 11;
+    static final int MARIO_FALL_STRENGTH = 9;
     static final float MARIO_START_X = 50;
-    static int mario_running_animation_delta_time = 30;
+    static int mario_running_animation_delta_time = MARIO_FRAME * 2;
 
     /**
      * Score settings.

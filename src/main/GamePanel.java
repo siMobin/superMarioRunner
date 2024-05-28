@@ -4,11 +4,7 @@ import components.background.Background;
 import components.mario.Mario;
 import components.ground.Ground;
 import components.obstacles.Obstacles;
-import components.ui.GameOver;
-import components.ui.Intro;
-import components.ui.Paused;
-import components.ui.Score;
-import components.ui.isMute;
+import components.ui.*;
 import interfaces.GameSettings;
 import interfaces.SoundManager;
 
@@ -18,7 +14,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class GamePanel extends JPanel implements Runnable, KeyListener, GameSettings, SoundManager {
-    private int game_fps = 60;
 
     private Thread mainThread = new Thread(this);
 
@@ -51,8 +46,8 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         setVisible(true);
 
         add(introUI.introLabel);
-
         mainThread.start();
+        System.out.println("FPS: " + game_fps);
     }
 
     /**
@@ -216,7 +211,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener, GameSett
         // INTRO LOOP FOR EASTER EGG
         while (intro) {
             try {
-                int msPerFrame = 1000 / game_fps;
+                int msPerFrame = 5000 / game_fps;
                 Thread.sleep(msPerFrame);
             } catch (InterruptedException e) {
                 e.printStackTrace();

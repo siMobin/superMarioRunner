@@ -7,10 +7,10 @@ public class App implements GameSettings {
     public static void main(String[] args) {
         System.out.println();
         System.out.println("|-----------------------------------------------|");
-        System.out.println("|       Press space, w or up key to jump        |");
-        System.out.println("|       Press s or down key to quick fall       |");
-        System.out.println("|       Press m to mute the audio               |");
-        System.out.println("|       Press p or esc to pause                 |");
+        System.out.println("|       Press space, W, or the up key to jump   |");
+        System.out.println("|       Press S or the down key to fall faster  |");
+        System.out.println("|       Press M to mute the audio               |");
+        System.out.println("|       Press P or Esc to pause                 |");
         if (DEBUGGER)
             System.out.println("|       Press ` key to enter debug mode         |");
         System.out.println("|-----------------------------------------------|");
