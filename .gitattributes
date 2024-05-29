@@ -1,0 +1,15 @@
+*.7z binary
+*.exe binary
+*.psd binary
+*.zip binary
+*.jar binary
+*.rar binary
+*.pdf binary
+*.doc binary
+*.docx binary
+
+docs/ export-ignore
+ASSETS/ export-ignore
+.github/ export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore

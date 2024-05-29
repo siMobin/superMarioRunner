@@ -1,0 +1,13 @@
+# .vscode
+.m2/*
+bin/*
+*.txt
+*HighScore*
+*temp*
+temp/*
+
+# Temporary ignored
+*SMR_*
+
+# Override
+!*repository*
